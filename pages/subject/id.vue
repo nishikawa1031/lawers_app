@@ -14,9 +14,6 @@
           年度を選択してください。
         </v-card-title>
         <v-card-text>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
           <v-btn
             v-for="(year, index) in years"
             :key="index"
@@ -25,6 +22,10 @@
           >
             {{ year.content }}
           </v-btn>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -36,24 +37,24 @@ export default {
   data () {
     return {
       years: [
-        { id:2019, content: '平成31年', created: '2019-03-31 15:30' },
-        { id:2018, content: '平成30年', created: '2019-03-31 15:30' },
-        { id:2017, content: '平成29年', created: '2019-03-31 15:30' },
-        { id:2016, content: '平成28年', created: '2019-03-31 15:30' },
-        { id:2015, content: '平成27年', created: '2019-03-31 15:30' },
-        { id:2014, content: '平成26年', created: '2019-03-31 15:30' },
-        { id:2013, content: '平成25年', created: '2019-03-31 15:30' },
-        { id:2012, content: '平成24年', created: '2019-03-31 15:30' },
-        { id:2011, content: '平成23年', created: '2019-03-31 15:30' },
-        { id:2010, content: '平成22年', created: '2019-03-31 15:30' },
-        { id:2009, content: '平成21年', created: '2019-03-31 15:30' },
-        { id:2008, content: '平成19年', created: '2019-03-31 15:30' },
-        { id:2007, content: '平成18年', created: '2019-03-31 15:30' },
+        { id:2019, content: 'H31(2019)', created: '2019-03-31 15:30' },
+        { id:2018, content: 'H30(2018)', created: '2019-03-31 15:30' },
+        { id:2017, content: 'H29(2017)', created: '2019-03-31 15:30' },
+        { id:2016, content: 'H28(2016)', created: '2019-03-31 15:30' },
+        { id:2015, content: 'H27(2015)', created: '2019-03-31 15:30' },
+        { id:2014, content: 'H26(2014)', created: '2019-03-31 15:30' },
+        { id:2013, content: 'H25(2013)', created: '2019-03-31 15:30' },
+        { id:2012, content: 'H24(2012)', created: '2019-03-31 15:30' },
+        { id:2011, content: 'H23(2011)', created: '2019-03-31 15:30' },
+        { id:2010, content: 'H22(2010)', created: '2019-03-31 15:30' },
+        { id:2009, content: 'H21(2009)', created: '2019-03-31 15:30' },
+        { id:2008, content: 'H20(2008)', created: '2019-03-31 15:30' },
+        { id:2007, content: 'H19(2007)', created: '2019-03-31 15:30' },
       ]
     }
   },
   methods:{
-    yearID(id){
+    yearID(year_id){
       this.selected = this.route.params.id;
       this.$router.push({path:'/subject/id/' + this.selected + 'year/year_id/',query:{'year_id':year_id}})
     }

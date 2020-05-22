@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar>
+    <v-app-bar app>
       <v-btn text to="/"><v-toolbar-title v-text="title" /></v-btn>
       <v-btn
         v-for="(subject, index) in subjects"
