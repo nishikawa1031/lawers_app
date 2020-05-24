@@ -10,6 +10,8 @@
       >
         {{ subject.content }}
       </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn to="login">login</v-btn>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -27,7 +29,10 @@
 </template>
 
 <script>
+
+
 export default {
+
   data () {
     return {
       subjects: [
