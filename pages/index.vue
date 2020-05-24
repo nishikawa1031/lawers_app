@@ -19,7 +19,7 @@
 <script>
 const axios = require('axios')
 
-const url = 'https://lawanswerapp.firebaseio.com'
+const url = 'https://lawanswerapp.firebaseio.com/user.json'
 
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
