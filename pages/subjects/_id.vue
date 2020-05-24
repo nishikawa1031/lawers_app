@@ -9,6 +9,7 @@
       sm8
       md6
     >
+    <div class="text-center">{{this.$route.query.id}}</div>
       <v-card>
         <v-card-title class="headline">
           年度を選択してください。
@@ -53,10 +54,24 @@ export default {
       ]
     }
   },
+  mounted(){
+    this.yearID();
+
+  },
   methods:{
     yearID(year_id){
-      this.selected = this.route.params.id;
-      this.$router.push({path:'/subject/id/' + this.selected + 'year/year_id/',query:{'year_id':year_id}})
+      this.selected = this.$route.query.id;
+      console.log(this.selected)
+      this.$router.push(
+        {
+          path:'/subjects/id/?id=' + this.selected,
+          children:[
+            {
+              path:'/year/year_id/?year=',
+              query:{'year_id':year_id}
+            }
+          ]
+        })
     }
   }
 }

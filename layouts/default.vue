@@ -50,7 +50,7 @@ export default {
   },
   methods:{
     subjectID(id){
-      this.$router.push({path:'/subject/id/',query:{'id':id}})
+      this.$router.push({path:'/subjects/id/',query:{'id':id}})
     }
   }
 }
