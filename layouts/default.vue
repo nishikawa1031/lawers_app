@@ -19,7 +19,6 @@
       </v-container>
     </v-content>
     <v-footer
-      :fixed="fixed"
       app
     >
     <v-btn text>contact</v-btn>
@@ -29,8 +28,6 @@
 </template>
 
 <script>
-
-
 export default {
   data () {
     return {

@@ -10,28 +10,33 @@
       md6
     >
       <div class="text-center">
-        aaa<p>{{ html_data }}</p>
+        aaa
+          <ul>
+　　　　　　　<!-- リスト形式データの表示 -->
+           <li v-for="user in users" v-bind:key="user.id">
+               {{user.name}}
+           </li>
+       </ul>
       </div>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-const axios = require('axios')
+import firebase from '@/plugins/firebase'
 
-const url = 'https://lawanswerapp.firebaseio.com/user.json'
+const db = firebase.firestore()
 
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
 
 export default {
-  async asyncData() {
-    const result = await axios.get(url)
-    return { html_data: result.data }
-  },
-  components: {
-    Logo,
-    VuetifyLogo
+  mounted() {
+    db.collection("users").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+      });
+    });
   }
 }
+
+
 </script>
