@@ -11,7 +11,7 @@
         {{ subject.content }}
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn to="/login">login</v-btn>
+      <v-btn to="/login">投稿する</v-btn>
     </v-app-bar>
     <v-content>
       <v-container>

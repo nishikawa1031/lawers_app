@@ -26,7 +26,6 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -56,7 +55,6 @@ export default {
   },
   mounted(){
     this.yearID();
-
   },
   methods:{
     yearID(year_id){

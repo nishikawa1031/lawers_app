@@ -97,20 +97,20 @@ export default {
          email: this.user.email,
        })
        .then(ref => {
+         alert('送信しました')
          console.log('Add ID: ', ref.id)
        })
     },
     getData () {
       const db = firebase.firestore()
-      let docUsers = db.collection('users').doc('8Ner2tNFSFmXYq3hDYck')
-      let dbData = []
-      this.dbData = dbData
+      let docUsers = db.collection('users').doc('lxWLuO3uPU7pcpxVhv1d')
       docUsers
-          .get()
-          .then(function(doc) {
-            dbData.push(doc.data().name)
-          })
-   },
-  },
+        .get()
+        .then(function(doc) {
+          alert('取得しました')
+          document.getElementById("user.id").textContent = (doc.data().name)
+        })
+      },
+    },
 }
 </script>

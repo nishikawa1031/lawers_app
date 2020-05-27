@@ -11,12 +11,11 @@
     >
       <div class="text-center">
         aaa
-          <ul>
-　　　　　　　<!-- リスト形式データの表示 -->
-           <li v-for="user in users" v-bind:key="user.id">
-               {{user.name}}
-           </li>
-       </ul>
+        <ul>
+          <li v-for="user in users" v-bind:key="user.id">
+              {{user.name}}
+          </li>
+        </ul>
       </div>
     </v-flex>
   </v-layout>
@@ -29,10 +28,16 @@ const db = firebase.firestore()
 
 
 export default {
+  data () {
+    return {
+      users:[],
+      doc:[]
+    }
+  },
   mounted() {
     db.collection("users").get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-          console.log(doc.id, " => ", doc.data());
+        console.log(doc.id, " => ", doc.data());
       });
     });
   }
