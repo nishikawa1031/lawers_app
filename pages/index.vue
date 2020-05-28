@@ -10,10 +10,11 @@
       md6
     >
       <div class="text-center">
-        aaa
+        {{ allAnswers }}
         <ul>
-          <li v-for="user in users" v-bind:key="user.id">
-              {{user.name}}
+          <li v-for="user in allData" v-bind:key="user.id">
+            <v-card>{{user.name}}</v-card>
+
           </li>
         </ul>
       </div>
@@ -30,16 +31,27 @@ const db = firebase.firestore()
 export default {
   data () {
     return {
-      users:[],
-      doc:[]
+      allData: [],
+      allAnswers:[]
     }
   },
+  created() {
+    allusers: {
+        firebase.firestore().collection('users').get().then(snapshot => {
+          snapshot.forEach(doc => {
+            this.allData.push(doc.data())
+          })
+        })
+      }
+    allanswers: {
+        firebase.firestore().collection('answers').get().then(snapshot => {
+          snapshot.forEach(doc => {
+            this.allAnswers.push(doc.data())
+          })
+        })
+      }
+  },
   mounted() {
-    db.collection("users").get().then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        console.log(doc.id, " => ", doc.data());
-      });
-    });
   }
 }
 
