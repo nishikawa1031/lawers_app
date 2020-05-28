@@ -21,7 +21,7 @@
     <v-footer
       app
     >
-    <v-btn text>contact</v-btn>
+    <v-btn text to="/contact">contact</v-btn>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>

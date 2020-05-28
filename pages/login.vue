@@ -43,6 +43,8 @@
           <v-col class="d-flex" cols="12" sm="6">
             <v-select
               :items="answer.subject"
+              item-text="name"
+              item-value="code"
               label="科目"
               dense
             ></v-select>
@@ -74,7 +76,10 @@ export default {
       answer:{
         year:[2007,2008],
         content:"",
-        subject:[0,1],
+        subject:[{"code":'01',"name":"憲法"},
+            {"code":'02',"name":"民法"},
+            {"code":'03',"name":"刑法"},
+        ],
       },
       dbData: "",
     }
