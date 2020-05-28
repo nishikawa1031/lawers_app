@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <div v-if="!isLogin">
-        <button @click="googleLogin">Googleでログイン</button>
+        <v-btn @click="googleLogin">Googleでログイン</v-btn>
       </div>
       <div v-else>
         <p>{{ user.email }}でログイン中</p>
@@ -31,12 +31,11 @@
           v-model="user.email"
         >
       </label>
-      <button
-        type="button"
+      <v-btn
         @click="submit()"
       >
         Submit
-      </button>
+      </v-btn>
       <p>{{ dbData }}</p>
     </div>
     <v-row align="center">
