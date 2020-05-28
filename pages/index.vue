@@ -10,10 +10,14 @@
       md6
     >
       <div class="text-center">
-        {{ allAnswers }}
         <ul>
-          <li v-for="user in allData" v-bind:key="user.id">
-            <v-card>{{user.name}}</v-card>
+          <li v-for="answer in allAnswers" v-bind:key="answer.id">
+            <v-card>
+              {{answer.content}}
+              {{answer.subject}}
+              {{answer.year}}
+              {{answer.user_id}}
+            </v-card>
 
           </li>
         </ul>
