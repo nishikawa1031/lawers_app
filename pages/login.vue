@@ -1,64 +1,85 @@
 <template>
   <v-container fluid>
     <v-layout justify-center>
-      <div v-if="isWaiting">
-        <p>読み込み中</p>
-      </div>
-      <div v-else>
-        <div v-if="!isLogin">
-          <v-btn @click="googleLogin">Googleでログイン</v-btn>
+      <v-row>
+        <div v-if="isWaiting">
+          <p>読み込み中</p>
         </div>
         <div v-else>
-          <p>{{ user.email }}でログイン中</p>
-          <v-btn @click="logOut">ログアウト</v-btn>
+          <div v-if="!isLogin">
+            <v-btn @click="googleLogin">Googleでログイン</v-btn>
+          </div>
+          <div v-else>
+            <v-row>
+              <p>{{ user.email }}でログイン中</p>
+            </v-row>
+            <v-row>
+              <v-btn @click="logOut">ログアウト</v-btn>
+            </v-row>
+            <v-row>
+              <label>
+                <span>
+                  お名前:
+                </span>
+                <input
+                  type="text"
+                  v-model="user.name"
+                >
+              </label>
+            </v-row>
+            <v-row>
+              <label>
+                <span>
+                  email:
+                </span>
+                <input
+                  type="text"
+                  v-model="user.email"
+                >
+              </label>
+            </v-row>
+            <v-row>
+              <v-btn @click="submit()">
+                Submit
+              </v-btn>
+            </v-row>
+          </div>
         </div>
-      </div>
-      <div v-if="isLogin">
-        <label>
-          <span>
-            お名前:
-          </span>
-          <input
-            type="text"
-            v-model="user.name"
-          >
-        </label>
-        <label>
-          <span>
-            email:
-          </span>
-          <input
-            type="text"
-            v-model="user.email"
-          >
-        </label>
-        <v-btn
-          @click="submit()"
-        >
-          Submit
-        </v-btn>
-        <p>{{ dbData }}</p>
-
-        <v-row align="center">
-          <v-col class="d-flex" cols="12" sm="6">
-            <v-select
-              :items="answer.subject"
-              item-text="name"
-              item-value="code"
-              label="科目"
-              dense
-            ></v-select>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="6">
-            <v-select
-              :items="answer.year"
-              label="年度"
-              dense
-            ></v-select>
-          </v-col>
-          <v-btn @click="submitAnswer()">投稿する</v-btn>
-        </v-row>
-      </div>
+      </v-row>
+      <v-row>
+        <div v-if="isLogin">
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                :items="answer.subject"
+                item-text="name"
+                item-value="code"
+                label="科目"
+                dense
+              ></v-select>
+            </v-col>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                :items="answer.year"
+                label="年度"
+                dense
+              ></v-select>
+            </v-col>
+            <v-row>
+              <label>
+                <span>
+                  ここにファイルをアップロードしてください
+                </span>
+                <input
+                  type="text"
+                  v-model="answer.content"
+                >
+              </label>
+            </v-row>
+            <v-row>
+              <v-btn @click="submitAnswer()">投稿する</v-btn>
+            </v-row>
+        </div>
+      </v-row>
     </v-layout>
   </v-container>
 </template>
@@ -80,8 +101,7 @@ export default {
             {"code":'02',"name":"民法"},
             {"code":'03',"name":"刑法"},
         ],
-      },
-      dbData: "",
+      }
     }
   },
   asyncData() {
