@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container fluid>
     <div v-if="isWaiting">
       <p>読み込み中</p>
     </div>
@@ -37,15 +37,27 @@
       >
         Submit
       </button>
-      <button
-        type="button"
-        @click="getData"
-      >
-        getchData
-      </button>
       <p>{{ dbData }}</p>
     </div>
-  </section>
+    <v-row align="center">
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select
+          :items="answer.subject"
+          label="科目"
+          dense
+        ></v-select>
+      </v-col>
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select
+          :items="answer.year"
+          label="年度"
+          dense
+        ></v-select>
+      </v-col>
+      <v-btn @click="submitAnswer()">投稿する</v-btn>
+
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -57,6 +69,11 @@ export default {
       user: {
         name: "",
         email: ""
+      },
+      answer:{
+        year:[2007,2008],
+        content:"",
+        subject:[0,1],
       },
       dbData: "",
     }
@@ -101,16 +118,20 @@ export default {
          console.log('Add ID: ', ref.id)
        })
     },
-    getData () {
-      const db = firebase.firestore()
-      let docUsers = db.collection('users').doc('lxWLuO3uPU7pcpxVhv1d')
-      docUsers
-        .get()
-        .then(function(doc) {
-          alert('取得しました')
-          document.getElementById("user.id").textContent = (doc.data().name)
-        })
-      },
+    submitAnswer () {
+     const db = firebase.firestore()
+     let dbAnswers = db.collection('answers')
+     dbAnswers
+       .add({
+         subject: this.answer.subject,
+         year: this.answer.year,
+         content: this.answer.content
+       })
+       .then(ref => {
+         alert('送信しました')
+         console.log('Add ID: ', ref.id)
+       })
     },
+  }
 }
 </script>
