@@ -50,16 +50,18 @@
         <div v-if="isLogin">
             <v-col class="d-flex" cols="12" sm="6">
               <v-select
-                :items="answer.subject"
+                v-model="answer.subject"
                 item-text="name"
                 item-value="code"
+                :items="subjects"
                 label="科目"
                 dense
               ></v-select>
             </v-col>
             <v-col class="d-flex" cols="12" sm="6">
               <v-select
-                :items="answer.year"
+                v-model="answer.year"
+                :items="years"
                 label="年度"
                 dense
               ></v-select>
@@ -75,6 +77,9 @@
                 >
               </label>
             </v-row>
+            <label class="postImage-appendBtn">
+              <input @change="upload" type="file" data-label="画像の添付">
+            </label>
             <v-row>
               <v-btn @click="submitAnswer()">投稿する</v-btn>
             </v-row>
@@ -94,13 +99,15 @@ export default {
         name: "",
         email: ""
       },
-      answer:{
-        year:[2007,2008],
-        content:"",
-        subject:[{"code":'01',"name":"憲法"},
+      subjects:[{"code":'01',"name":"憲法"},
             {"code":'02',"name":"民法"},
             {"code":'03',"name":"刑法"},
-        ],
+      ],
+      years:[2007,2008],
+      answer:{
+        year:"",
+        content:"",
+        subject:"",
       }
     }
   },
@@ -138,6 +145,7 @@ export default {
        .add({
          name: this.user.name,
          email: this.user.email,
+         created_at: firebase.firestore.FieldValue.serverTimestamp(),
        })
        .then(ref => {
          alert('送信しました')
@@ -151,13 +159,29 @@ export default {
        .add({
          subject: this.answer.subject,
          year: this.answer.year,
-         content: this.answer.content
+         content: this.answer.content,
+         created_at: firebase.firestore.FieldValue.serverTimestamp(),
        })
        .then(ref => {
          alert('送信しました')
          console.log('Add ID: ', ref.id)
        })
     },
+    upload (p) {
+        const file = p.target.files[0]
+        const storageRef = firebase.storage().ref('users/' + this.id + '/images/' + file.name)
+        // 画像をStorageにアップロード
+        storageRef.put(file).then(() => {
+            // アップロードした画像のURLを取得
+            firebase.storage().ref('users/' + this.id + '/images/' + file.name).getDownloadURL().then((url) => {
+                // アップロードした画像のURLと画像名をDBに保存
+                this.$store.dispatch('user/uploadImage', { id: this.id, name: file.name, url: url })
+              alert('保存しました。')
+            }).catch((error) => {
+                console.log(error)
+            })
+        })
+    }
   }
 }
 </script>
