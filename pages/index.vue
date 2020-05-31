@@ -18,9 +18,9 @@
               {{answer.year}}
               {{answer.user_id}}
             </v-card>
-
           </li>
         </ul>
+        <img src="" id="image" />
       </div>
     </v-flex>
   </v-layout>
@@ -56,6 +56,10 @@ export default {
       }
   },
   mounted() {
+    let ref = firebase.storage().ref().child('/users/undefined/images/bbb.png')
+    ref.getDownloadURL().then(function(url){
+      document.getElementById('image').src = url;
+    });
   }
 }
 
